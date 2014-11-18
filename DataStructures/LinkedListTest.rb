@@ -228,6 +228,32 @@ class TestSinglyLinkedList < Test::Unit::TestCase
     assert_equal("BCDF", linkedList.toString())
   end
 
+# test SinglyLinkedList.reverse()
+  def test_SinglyLinkedList_reverse_returns_CBA_when_given_ABC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C"])
+
+    linkedList.reverse()
+
+    assert_equal("CBA", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_reverse_returns_FDCBA_when_given_ABCDF
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C","D","F"])
+
+    linkedList.reverse()
+
+    assert_equal("FDCBA", linkedList.toString())
+  end
+  def test_SinglyLinkedList_reverse_returns_A_when_given_A
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A"])
+
+    linkedList.reverse()
+
+    assert_equal("A", linkedList.toString())
+  end
 # test SinglyLinkedList.toString()
   def test_SinglyLinkedList_returns_A_when_toStrig_called
   	linkedList = SinglyLinkedList.new()

@@ -86,6 +86,19 @@ class SinglyLinkedList
 		end 
 	end
 
+	def reverse ()
+		new_head = Node.new(nil,nil) #fake head for reversed list
+		new_next = nil
+		current = @head.next
+
+		while current != nil do
+
+			new_head.next = Node.new(current.value, new_head.next)			
+			current = current.next
+		end 
+		@head.next = new_head.next
+	end
+
 	def addToStart (value)
 		self.add(value, 0)
 	end
