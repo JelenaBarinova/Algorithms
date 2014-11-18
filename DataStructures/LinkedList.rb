@@ -63,6 +63,7 @@ class SinglyLinkedList
 			if i == index then 
 				new_node = Node.new(value, current.next) 
 				current.next = new_node
+				return
 			end
 			current = current.next
 			i += 1
