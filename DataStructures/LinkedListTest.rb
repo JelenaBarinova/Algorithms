@@ -1,7 +1,5 @@
 require_relative "LinkedList"
 require "test/unit"
-# add (value, i)
-# remove (i)
 # reverse
 
 class TestSinglyLinkedList < Test::Unit::TestCase
@@ -136,6 +134,98 @@ class TestSinglyLinkedList < Test::Unit::TestCase
     linkedList.populate(["A","B","C","D"])
 
     assert_equal(nil, linkedList.get(-14))
+  end
+
+# test SinglyLinkedList.add()
+  def test_SinglyLinkedList_returns_ABC_when_A_added_at_index_0_of_BC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["B","C"])
+
+    linkedList.add("A", 0)
+
+    assert_equal("ABC", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_returns_ABC_when_C_added_at_index_2_of_AB
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B"])
+
+    linkedList.add("C", 2)
+
+    assert_equal("ABC", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_returns_ABC_when_B_added_at_index_1_of_AC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","C"])
+
+    linkedList.add("B", 1)
+
+    assert_equal("ABC", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_returns_ABCD_when_D_added_at_index_3_of_ABC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C"])
+
+    linkedList.add("D", 3)
+
+    assert_equal("ABCD", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_returns_ABCD_when_F_added_at_non_exzisting_index_7_of_ABC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C","D"])
+
+    linkedList.add("F", 7)
+
+    assert_equal("ABCD", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_returns_ABCD_when_C_added_at_index_2_negative_of_ABD
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","D"])
+
+    linkedList.add("C", -2)
+
+    assert_equal("ABCD", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_returns_ABCD_when_D_added_at_index_1_negative_of_ABC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C"])
+
+    linkedList.add("D", -1)
+
+    assert_equal("ABCD", linkedList.toString())
+  end
+
+  # test SinglyLinkedList.remove()
+  def test_SinglyLinkedList_returns_AC_when_node_removed_at_index_1_of_ABC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C"])
+
+    linkedList.remove(1)
+
+    assert_equal("AC", linkedList.toString())
+  end
+  
+  def test_SinglyLinkedList_returns_AB_when_node_removed_at_index_1_negative_of_ABC
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C"])
+
+    linkedList.remove(-1)
+
+    assert_equal("AB", linkedList.toString())
+  end
+
+  def test_SinglyLinkedList_returns_BCDF_when_node_removed_at_index_5_negative_of_ABCDF
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C","D","F"])
+
+    linkedList.remove(-5)
+
+    assert_equal("BCDF", linkedList.toString())
   end
 
 # test SinglyLinkedList.toString()

@@ -53,19 +53,44 @@ class SinglyLinkedList
 		return current_value
 	end
 
+	def add (value, index)
+		if index < 0 then index = self.length() + index + 1 end
+
+		current = @head #insert will happen after current
+		i = 0
+
+		while current != nil and i <= index do
+			if i == index then 
+				new_node = Node.new(value, current.next) 
+				current.next = new_node
+			end
+			current = current.next
+			i += 1
+		end 
+	end
+
+	def remove (index)
+		if index < 0 then index = self.length() + index end
+
+		current = @head #delete will happen after current
+		i = 0
+
+		while current.next != nil and i <= index do
+			if i == index then 
+				current.next = current.next.next
+				return
+			end
+			current = current.next
+			i += 1
+		end 
+	end
+
 	def addToStart (value)
-		current = @head.next #skipping fake head
-		new_node = Node.new(value, current)
-		@head.next = new_node
+		self.add(value, 0)
 	end
 
 	def addToEnd (value)
-		current = @head
-		while current.next != nil do
-			current = current.next  
-		end 
-		new_node = Node.new(value, nil)
-		current.next = new_node
+		self.add(value,-1)
 	end
 
 	def toString ()
