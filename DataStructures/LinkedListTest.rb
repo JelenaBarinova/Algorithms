@@ -254,6 +254,7 @@ class TestSinglyLinkedList < Test::Unit::TestCase
 
     assert_equal("A", linkedList.toString())
   end
+  
 # test SinglyLinkedList.toString()
   def test_SinglyLinkedList_returns_A_when_toStrig_called
   	linkedList = SinglyLinkedList.new()
