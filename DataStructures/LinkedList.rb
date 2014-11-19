@@ -29,7 +29,7 @@ class SinglyLinkedList
         length = 0
 
         while current != nil do
-            length = length + 1
+            length += 1
             current = current.next
         end
         return length
@@ -38,25 +38,63 @@ class SinglyLinkedList
     def get (index)
 
         # O(2n) -> O(n)
-        if index < 0 then index = self.length() + index end
-
-        i = 0
-        current_value = nil
         current = @head.next
 
+        if index < 0 then
+            second = current
+            index += 1
+
+            while index < 0 and !second.next.nil? do
+                index += 1
+                second = second.next
+            end
+
+            if index < 0 then
+                return nil
+            end
+
+            while !second.next.nil? do
+                second = second.next
+                current = current.next
+            end
+
+            return current.value           
+        end
+
+        i = 0
         while current != nil do
-            if i == index then current_value = current.value end
+            if i == index then 
+                return current.value
+            end
             current = current.next
             i += 1
         end 
 
-        return current_value
+        return nil
     end
 
     def add (value, index)
-        if index < 0 then index = self.length() + index + 1 end
-
         current = @head #insert will happen after current
+
+        if index < 0 then
+            second = current
+            index += 1
+
+            while index < 0 and !second.next.nil? do
+                index += 1
+                second = second.next
+            end
+
+            if index < 0 then
+                return nil
+            end
+
+            while !second.next.nil? do
+                second = second.next
+                current = current.next
+            end           
+        end
+
         i = 0
 
         while current != nil and i <= index do
@@ -71,9 +109,30 @@ class SinglyLinkedList
     end
 
     def remove (index)
-        if index < 0 then index = self.length() + index end
+        current = @head
 
-        current = @head #delete will happen after current
+        if index < 0 then
+            second = current
+
+
+            while index < 0 and !second.next.nil? do
+                index += 1
+                second = second.next
+            end
+
+            if index < 0 then
+                return nil
+            end
+
+            while !second.next.nil? do
+                second = second.next
+                current = current.next
+            end           
+            value = current.next.value
+            current.next = current.next.next
+            return value
+        end
+
         i = 0
 
         while current.next != nil and i <= index do
