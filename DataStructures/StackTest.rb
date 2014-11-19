@@ -1,4 +1,6 @@
-require_relative "Stack"
+#require_relative "Stack"
+require_relative "StackArray"
+
 require "test/unit"
 
 
