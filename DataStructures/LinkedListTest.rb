@@ -254,7 +254,16 @@ class TestSinglyLinkedList < Test::Unit::TestCase
 
     assert_equal("A", linkedList.toString())
   end
-  
+# test SinglyLinkedList.iterate()  
+  def test_iterate_returns_ABCD_from_ABCD
+    linkedList = SinglyLinkedList.new()
+    linkedList.populate(["A","B","C","D"])
+
+    str = ""
+    linkedList.iterate {|i| str = str + i}
+    assert_equal("ABCD", str)
+  end
+
 # test SinglyLinkedList.toString()
   def test_SinglyLinkedList_returns_A_when_toStrig_called
   	linkedList = SinglyLinkedList.new()

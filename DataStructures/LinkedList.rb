@@ -99,6 +99,15 @@ class SinglyLinkedList
 		@head.next = new_head.next
 	end
 
+	def iterate ()
+        current_node = @head.next
+
+        while current_node != nil
+        	yield current_node.value
+            current_node = current_node.next
+        end
+    end
+
 	def addToStart (value)
 		self.add(value, 0)
 	end
@@ -108,13 +117,9 @@ class SinglyLinkedList
 	end
 
 	def toString ()
-		current = @head.next #skipping fake head
+		
 		str = ""
-
-		while current != nil
-			str = str + current.value.to_s
-			current = current.next
-		end
+		self.iterate {|i| str = str + i.to_s}
 		return str
 	end
 
