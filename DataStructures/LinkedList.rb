@@ -12,20 +12,17 @@ end
 class SinglyLinkedList
 
     def initialize ()
-        #create with fake head
+        #create list with sentinel node, link head to it
         @head = Node.new()
     end
 
     def isEmpty ()
-        #unless @head.next.nil? true : false end
-        if @head.next == nil then true
-        else false 
-        end
+        return @head.next.nil?
     end
 
 
     def length ()
-        current = @head.next #skipping fake head
+        current = @head.next #skipping sentinel node
         length = 0
 
         while current != nil do
@@ -37,7 +34,6 @@ class SinglyLinkedList
 
     def get (index)
 
-        # O(2n) -> O(n)
         current = @head.next
 
         if index < 0 then
@@ -109,7 +105,7 @@ class SinglyLinkedList
     end
 
     def remove (index)
-        current = @head
+        current = @head #remove will happen after current
 
         if index < 0 then
             second = current
@@ -147,8 +143,7 @@ class SinglyLinkedList
     end
 
     def reverse ()
-        # no extra memory, just relinking
-        new_head = Node.new(nil,nil) #fake head for reversed list
+        new_head = Node.new(nil,nil) #sentinel node for reversed list
         current = @head
 
         while current != nil do
@@ -159,6 +154,7 @@ class SinglyLinkedList
         end 
         @head = new_head
     end
+    
     def iterate ()
         current_node = @head.next
 
@@ -176,15 +172,4 @@ class SinglyLinkedList
         self.add(value,-1)
     end
 
-    def toString ()     
-        str = ""
-        self.iterate {|i| str = str + i.to_s}
-        return str
-    end
-
-    def populate (arr)
-        if !arr.empty? then
-            arr.each { |a| self.addToEnd(a) }
-        end
-    end
 end
