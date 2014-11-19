@@ -36,4 +36,12 @@ class Queue
         end
         return i
     end
+
+    def iterate ()
+        current = @first.next
+        while !current.nil? do
+            yield current.value
+            current = current.next
+        end
+    end
 end

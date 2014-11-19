@@ -36,7 +36,9 @@ class Stack
     end
 
     def toString()
-        return @list.toString()
+        str = ""
+        @list.iterate {|i| str = str + i.to_s}
+        return str
     end
 
 end
