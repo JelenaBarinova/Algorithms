@@ -149,17 +149,16 @@ class SinglyLinkedList
     def reverse ()
         # no extra memory, just relinking
         new_head = Node.new(nil,nil) #fake head for reversed list
-        new_next = nil
-        current = @head.next
+        current = @head
 
         while current != nil do
-
-            new_head.next = Node.new(current.value, new_head.next)          
+            node = current 
             current = current.next
+            node.next = new_head.next
+            new_head.next = node
         end 
-        @head.next = new_head.next
+        @head = new_head
     end
-
     def iterate ()
         current_node = @head.next
 
@@ -188,6 +187,4 @@ class SinglyLinkedList
             arr.each { |a| self.addToEnd(a) }
         end
     end
-
-
 end
