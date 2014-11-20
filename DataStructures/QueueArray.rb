@@ -2,36 +2,48 @@
 require_relative "LinkedList"
 
 class Queue 
-    #attr_accessor :value, :next
+    attr_accessor :capacity
     #enqueue
     #dequeue
 
     def initialize ()   
-        @list = Array.new(10)
+        @capacity = 1
+        @list = Array.new(@capacity)
         @first = nil # first added to queue (oldest in queue, first to pop)
         @last = nil # the index after last added node (= 2 for queueu of AB)
         @size = 0
     end
 
     def isEmpty ()
-        return @first == @last
+        return @size == 0
     end
 
     def enqueue (value)
+        if @size == @capacity then self.resize(@capacity * 2) end
 
-        @list.insert(@last ||= 0, value)
-        @last += 1 
+        @list[@last ||= 0] = value
         @first ||= 0
-        @size += 1
+        @size += 1       
+        @last += 1
+        #use array from beginning next time for enqueue
+        if @last == @capacity then @last = 0 end  
     end
 
     def dequeue ()
         if self.isEmpty() then return nil
         else
             value = @list[@first] 
-            @list[@first]=nil
-            @first += 1
+            @list[@first] = nil
+
+            #if dequeued last array element, start using array from beginning next time for enqueue
+            if @first == @capacity - 1 then @first = 0
+            else
+                @first += 1
+            end
+
             @size -= 1
+            if @size == @capacity / 4 then self.resize(@capacity / 2) end
+
             return value
         end
     end
@@ -41,13 +53,28 @@ class Queue
     end
 
     def iterate ()
-        if self.isEmpty() then return nil
+      if self.isEmpty() then return nil
         else    
             i = @first
-            while i <= @last - 1 do
-                yield @list[i]
+            while i < @first + @size do
+                yield @list[i % @capacity]
                 i += 1
             end
         end
+    end
+
+    def resize (new_capacity)
+        @capacity = new_capacity
+        @new_list = Array.new(@capacity)
+        i = 0
+
+        self.iterate do |value|
+            @new_list[i] = value
+            i += 1    
+        end
+        
+        @list = @new_list
+        @first = 0
+        @last = @size
     end
 end
