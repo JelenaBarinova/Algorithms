@@ -13,7 +13,7 @@ class Stack
     end
 
     def size ()
-        return @list.compact().length
+        return @list.compact.length
     end
 
     def isEmpty ()
