@@ -10,6 +10,7 @@ class Queue
         @list = Array.new(10)
         @first = nil # first added to queue (oldest in queue, first to pop)
         @last = nil # the index after last added node (= 2 for queueu of AB)
+        @size = 0
     end
 
     def isEmpty ()
@@ -21,6 +22,7 @@ class Queue
         @list.insert(@last ||= 0, value)
         @last += 1 
         @first ||= 0
+        @size += 1
     end
 
     def dequeue ()
@@ -29,18 +31,13 @@ class Queue
             value = @list[@first] 
             @list[@first]=nil
             @first += 1
+            @size -= 1
             return value
         end
     end
 
     def size ()
-        #O(N) -> O(1)
-        if self.isEmpty() then return 0 
-        else
-            i = 0
-            self.iterate {|a| i += 1}
-            return i
-        end
+        return @size
     end
 
     def iterate ()
