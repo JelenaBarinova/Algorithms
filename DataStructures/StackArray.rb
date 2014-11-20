@@ -9,21 +9,21 @@ class Stack
 
     def initialize ()
         @capacity = 1
+        @size = 0
         @list = Array.new(@capacity, nil)
     end
 
     def size ()
-        return @list.compact.length
+        return @size
     end
 
     def isEmpty ()
-        if self.size() != 0 then false
-        else true
-        end
+        return @size == 0
     end
 
     def push (value)
         @list.push(value)
+        @size += 1
         if @list.size() == @capacity then
             self.resize (@capacity * 2) 
         end
@@ -33,6 +33,7 @@ class Stack
         if @list.size() == @capacity / 4 then
             self.resize (@capacity / 2)
         end
+        @size -= 1
         return @list.pop()
     end
 
