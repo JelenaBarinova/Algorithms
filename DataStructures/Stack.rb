@@ -18,9 +18,7 @@ class Stack
     end
 
     def isEmpty ()
-        if self.size() != 0 then false
-        else true
-        end
+        return self.size() == 0
     end
 
     def push (value)

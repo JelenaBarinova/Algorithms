@@ -24,13 +24,12 @@ class Stack
 
     def push (value)
         @list.push(value)
-        if @list.size() == @capacity - 1 then
+        if @list.size() == @capacity then
             self.resize (@capacity * 2) 
         end
     end
 
     def pop ()
-
         if @list.size() == @capacity / 4 then
             self.resize (@capacity / 2)
         end

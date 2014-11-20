@@ -20,7 +20,6 @@ class SinglyLinkedList
         return @head.next.nil?
     end
 
-
     def length ()
         current = @head.next #skipping sentinel node
         length = 0
@@ -110,7 +109,6 @@ class SinglyLinkedList
         if index < 0 then
             second = current
 
-
             while index < 0 and !second.next.nil? do
                 index += 1
                 second = second.next
@@ -143,7 +141,7 @@ class SinglyLinkedList
     end
 
     def reverse ()
-        new_head = Node.new(nil,nil) #sentinel node for reversed list
+        new_head = Node.new(nil, nil) #sentinel node for reversed list
         current = @head
 
         while current != nil do
@@ -169,7 +167,7 @@ class SinglyLinkedList
     end
 
     def addToEnd (value)
-        self.add(value,-1)
+        self.add(value, -1)
     end
 
 end

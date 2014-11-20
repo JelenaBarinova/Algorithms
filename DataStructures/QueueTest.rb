@@ -3,7 +3,6 @@
 require_relative "QueueArray"
 require "test/unit"
 
-
 class TestQueue < Test::Unit::TestCase
  
   def setup

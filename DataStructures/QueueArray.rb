@@ -34,6 +34,7 @@ class Queue
     end
 
     def size ()
+        #O(N) -> O(1)
         if self.isEmpty() then return 0 
         else
             i = 0

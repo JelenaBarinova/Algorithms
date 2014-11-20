@@ -6,7 +6,6 @@ require "test/unit"
 
 class TestStack < Test::Unit::TestCase
  
-
   def setup
     @stack = Stack.new()
   end
