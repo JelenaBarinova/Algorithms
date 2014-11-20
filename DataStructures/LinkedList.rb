@@ -14,6 +14,7 @@ class SinglyLinkedList
     def initialize ()
         #create list with sentinel node, link head to it
         @head = Node.new()
+        @length = 0
     end
 
     def isEmpty ()
@@ -21,14 +22,7 @@ class SinglyLinkedList
     end
 
     def length ()
-        current = @head.next #skipping sentinel node
-        length = 0
-
-        while current != nil do
-            length += 1
-            current = current.next
-        end
-        return length
+        return @length
     end
 
     def get (index)
@@ -96,6 +90,7 @@ class SinglyLinkedList
             if i == index then 
                 new_node = Node.new(value, current.next) 
                 current.next = new_node
+                @length += 1
                 return
             end
             current = current.next
@@ -124,6 +119,7 @@ class SinglyLinkedList
             end           
             value = current.next.value
             current.next = current.next.next
+            @length -= 1
             return value
         end
 
@@ -133,6 +129,7 @@ class SinglyLinkedList
             if i == index then 
                 value = current.next.value
                 current.next = current.next.next
+                @length -= 1
                 return value
             end
             current = current.next
