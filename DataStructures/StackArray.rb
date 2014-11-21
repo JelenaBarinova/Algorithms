@@ -1,11 +1,5 @@
 #stack array implementation
 class Stack 
-    #attr_accessor :value, :next
-    # push insert
-    # pop remove
-    # iterate
-    # isEmpty
-    # length
 
     def initialize ()
         @capacity = 1

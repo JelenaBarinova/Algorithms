@@ -25,8 +25,8 @@ class TestSorts < Test::Unit::TestCase
   	end
   	def test_sort_negative_and_positive_numbers
   		
-  		@array = [7, 3, 9, -2, 0, -100]
-  		assert_equal([-100, -2, 0, 3, 7, 9], Sort(@array))
+  		@array = [0, 3, 9, -2, 3, -100]
+  		assert_equal([-100, -2, 0, 3, 3, 9], Sort(@array))
   	end
   	def test_sort_when_sortted_otherwise
   		

@@ -55,7 +55,7 @@ class TestQueue < Test::Unit::TestCase
     assert_equal("BC", queueToString())
   end
 
-  def test_enqueue_dequeue_cicling_is_done_when_multiple_enqueue_dequeue_done_not_reaching_capacity_5
+  def test_enqueue_dequeue_cycling_is_done_when_multiple_enqueue_dequeue_done_not_reaching_capacity_5
     @queue.capacity = 5   
     @queue.enqueue("A")
     @queue.enqueue("B")
@@ -111,7 +111,7 @@ class TestQueue < Test::Unit::TestCase
     end
     assert_equal(10, @queue.capacity)
   end
-    def test_resize_capacity_equals_2_when_only_one_item_added
+  def test_resize_capacity_equals_2_when_only_one_item_added
     @queue.capacity = 10
     for i in 1..9
         @queue.enqueue(i)

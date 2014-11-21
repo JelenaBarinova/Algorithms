@@ -3,8 +3,6 @@ require_relative "LinkedList"
 
 class Queue 
     attr_accessor :capacity
-    #enqueue
-    #dequeue
 
     def initialize ()   
         @capacity = 1
@@ -23,10 +21,10 @@ class Queue
 
         @list[@last ||= 0] = value
         @first ||= 0
-        @size += 1       
-        @last += 1
+        @size += 1
+
         #use array from beginning next time for enqueue
-        if @last == @capacity then @last = 0 end  
+        @last = (@last + 1) % @capacity
     end
 
     def dequeue ()
@@ -36,10 +34,7 @@ class Queue
             @list[@first] = nil
 
             #if dequeued last array element, start using array from beginning next time for enqueue
-            if @first == @capacity - 1 then @first = 0
-            else
-                @first += 1
-            end
+            @first = (@first + 1) % @capacity
 
             @size -= 1
             if @size == @capacity / 4 then self.resize(@capacity / 2) end
@@ -53,7 +48,7 @@ class Queue
     end
 
     def iterate ()
-      if self.isEmpty() then return nil
+        if self.isEmpty() then return nil
         else    
             i = @first
             while i < @first + @size do
@@ -66,8 +61,8 @@ class Queue
     def resize (new_capacity)
         @capacity = new_capacity
         @new_list = Array.new(@capacity)
-        i = 0
 
+        i = 0
         self.iterate do |value|
             @new_list[i] = value
             i += 1    
