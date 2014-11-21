@@ -1,7 +1,9 @@
 #BubbleSort
-def Sort (array)
-	if array.empty? then return nil
-	elsif array.size == 1 then return array
+def BubbleSort (array=nil)
+	if array.nil? then return nil end
+
+	if array.empty? then return nil end
+	if array.size == 1 then return array
 	else
 		i = 0
 		for i in 0..array.size() - 1

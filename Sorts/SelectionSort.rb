@@ -1,7 +1,9 @@
 #SelectionSort
-def Sort (array)
-    if array.empty? then return nil
-    elsif array.size == 1 then return array
+def SelectionSort (array = nil)
+    if array.nil? then return nil end
+
+    if array.empty? then return nil end
+    if array.size == 1 then return array
     else
         for i in 0..array.size - 1
             min_index = i
