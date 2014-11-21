@@ -1,7 +1,7 @@
 #SelectionSort
-def SelectionSort (array = nil)
-    if array.nil? then return nil end
+require_relative 'SortUtils'
 
+def SelectionSort (array)
     if array.empty? then return nil end
     if array.size == 1 then return array
     else
@@ -11,9 +11,7 @@ def SelectionSort (array = nil)
                 if array[j] < array[min_index] then min_index = j end
                 j += 1
             end
-            tmp = array[i]
-            array[i] = array[min_index]
-            array[min_index] = tmp
+            exch(array, i, min_index)
             i += 1
         end
         return array

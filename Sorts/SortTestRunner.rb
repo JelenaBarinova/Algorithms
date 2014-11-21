@@ -1,14 +1,28 @@
 require_relative 'SortTest'
 
-require_relative "BubbleSort"
-require_relative "SelectionSort"
+require_relative 'BubbleSort'
+require_relative 'SelectionSort'
 
 require 'test/unit/ui/console/testrunner'
 
-testSuite = Test::Unit::TestSuite.new("Test all sorting algorythms")
+Test::Unit.run = true
 
-testSuite << SortTestCases.new('BubbleSort')
-testSuite << SortTestCases.new('SelectionSort')
-testSuite << SortTestCases.new('BubbleSort')
+class BubbleSortTest < Test::Unit::TestCase
+  	def setup
+		@sort = 'BubbleSort' 
+   	end
+	include SortTestCases
+end
 
-Test::Unit::UI::Console::TestRunner.run(testSuite)
+class SelectionSortTest < Test::Unit::TestCase
+  	def setup
+		@sort = 'SelectionSort' 
+   	end
+	include SortTestCases
+end
+
+sortTestSuite = Test::Unit::TestSuite.new("Test all sorting algorithms") 
+sortTestSuite << BubbleSortTest.suite
+sortTestSuite << SelectionSortTest.suite
+
+Test::Unit::UI::Console::TestRunner.run(sortTestSuite)

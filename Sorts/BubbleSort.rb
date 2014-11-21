@@ -1,7 +1,7 @@
 #BubbleSort
-def BubbleSort (array=nil)
-	if array.nil? then return nil end
+require_relative 'SortUtils'
 
+def BubbleSort (array)
 	if array.empty? then return nil end
 	if array.size == 1 then return array
 	else
@@ -9,9 +9,7 @@ def BubbleSort (array=nil)
 		for i in 0..array.size() - 1
 			for j in 1..array.size() - 1 - i
 				if array[j - 1] > array[j] then
-					tmp = array[j - 1]
-					array[j - 1] = array[j]
-					array[j] = tmp
+					exch(array, j-1, j)
 				end
 				j += 1
 			end
