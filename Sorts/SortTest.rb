@@ -46,7 +46,7 @@ module SortTestCases
   		assert_equal([9, 9, 9], result)
   	end
   	def test_sort_randomly_filled_big_array
-  		@array = Array.new(10.times.map{ Random.rand(100) })
+  		@array = Array.new(1000.times.map{ Random.rand(100) })
 
       result = method(@sort).call(@array)
 

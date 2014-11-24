@@ -11,7 +11,7 @@ def InsertionSort (array)
 			i.downto(0) do |j|
 				if array[index] < array[j] then 
 					exch(array, index, j) 
-					index -= 1
+					index = j
 				end
 			end 
 			i += 1
