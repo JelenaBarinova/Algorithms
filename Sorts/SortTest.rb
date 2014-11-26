@@ -52,4 +52,11 @@ module SortTestCases
 
   		assert_equal(@array.sort(), result)
   	end
+    def test_shuffle_returns_not_sorted_array_when_given_sorted
+      @array = Array.new(100.times.map{ Random.rand(100) })
+
+      result = @array.sort().shuffle
+
+      assert_not_equal(@array.sort(), result)
+    end
 end
