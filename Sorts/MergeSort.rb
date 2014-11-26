@@ -24,6 +24,11 @@ def Sort (aux, array, lo, hi)
 end
 
 def Merge (aux, array, lo, mid, hi)
+    if !array[lo..mid].sorted? or !array[mid + 1..hi].sorted? then 
+        raise 'Arrays are not sorted before merge operation'
+        return nil
+    end
+
     i = lo
     while i <= hi
         aux[i] = array[i]

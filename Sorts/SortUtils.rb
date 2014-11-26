@@ -9,3 +9,9 @@ def exch (array,i, j)
 	array[i] = array[j]
 	array[j] = swap
 end
+
+module Enumerable
+  def sorted?
+    each_cons(2).all? { |a, b| (a <=> b) <= 0 }
+  end
+end
