@@ -19,4 +19,3 @@ module Enumerable
     each {|i| exch(array, i , Random.rand(i))}
   end
 end
-
