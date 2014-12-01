@@ -6,7 +6,7 @@ require_relative 'InsertionSort'
 require_relative 'ShellSort'
 require_relative 'MergeSort'
 require_relative 'QuickSort'
-
+require_relative '3WayPartitioningQuickSort'
 require 'test/unit/ui/console/testrunner'
 
 Test::Unit.run = true
@@ -53,6 +53,13 @@ class QuickSortTest < Test::Unit::TestCase
     include SortTestCases
 end
 
+class ThreeWayPartitioningQuickSort < Test::Unit::TestCase
+    def setup
+        @sort = 'ThreeWayPartitioningQuickSort' 
+    end
+    include SortTestCases
+end
+
 sortTestSuite = Test::Unit::TestSuite.new("Test all sorting algorithms") 
 sortTestSuite << BubbleSortTest.suite
 sortTestSuite << SelectionSortTest.suite
@@ -60,5 +67,6 @@ sortTestSuite << InsertionSortTest.suite
 sortTestSuite << ShellSortTest.suite
 sortTestSuite << MergeSortTest.suite
 sortTestSuite << QuickSortTest.suite
+sortTestSuite << ThreeWayPartitioningQuickSort.suite
 
 Test::Unit::UI::Console::TestRunner.run(sortTestSuite)
