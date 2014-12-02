@@ -6,20 +6,19 @@ def ThreeWayPartitioningQuickSort (array)
     if array.size == 1 then return array
     else
         n = array.size
-        #array = array.shuffle
+        array = array.shuffle
         SortT(array, 0, n -1)
         return array
     end
 end
 
-def PartitionT (array, lo, hi, fi, li)
+def PartitionT (array, lo, hi)
     fi = lo
     li = hi
     i = lo
     partition_key = array[lo]
     
     while i <= li
-        
         if partition_key > array[i] then 
             exch(array, i, fi)
             fi += 1 
@@ -31,8 +30,6 @@ def PartitionT (array, lo, hi, fi, li)
         elsif partition_key >= array [li] then
             exch(array, i, li)
             li -= 1
-        else 
-            i += 1 
         end
     end
     return fi, li
@@ -41,9 +38,7 @@ end
 
 def SortT (array, lo, hi)
     if lo >= hi then return nil end
-    fi = 0
-    li = 0
-    partition = PartitionT(array, lo, hi, fi, li)
+    partition = PartitionT(array, lo, hi)
     SortT(array, lo, partition[0] - 1)
     SortT(array, partition[1] + 1, hi)
     return array

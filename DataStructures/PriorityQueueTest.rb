@@ -29,6 +29,18 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.insert("B")
     assert_equal(3, @pq.size()) 
   end
+
+  def test_size_returns_correct_size_after_delete
+    
+    @pq.insert('A')
+    @pq.insert('F')
+    @pq.insert('B')
+    @pq.insert('D')
+
+    @pq.deleteMax()
+
+    assert_equal(3, @pq.size()) 
+  end
   
   # insert
   def test_insert_puts_key_in_expected_order
@@ -40,7 +52,7 @@ class TestMaxPQ < Test::Unit::TestCase
     assert_equal("DCBA", @pq.to_s()) 
   end
 
-  # insert
+  # insert@keys[k * 2 + 1].nil?
   def test_deleteMax_deletes_key_and_arrange_pq_as_expected
     
     @pq.insert('A')
@@ -64,6 +76,24 @@ class TestMaxPQ < Test::Unit::TestCase
 
     assert_equal("F", str) 
   end
+
+  def test_deleteMax_deletes_3_nodes_and_pq_stays_as_expected
+    
+    @pq.insert('A')
+    @pq.insert('F')
+    @pq.insert('K')
+    @pq.insert('B')
+    @pq.insert('D')
+    @pq.insert('G')
+    @pq.insert('M')
+
+    @pq.deleteMax()
+    @pq.deleteMax()
+    @pq.deleteMax()
+
+    assert_equal("FDBA", @pq.to_s()) 
+  end
+
   # isEmpty
   def test_isEmpty_retuns_true_when_pq_is_just_created
 
