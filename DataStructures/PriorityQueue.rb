@@ -21,7 +21,7 @@ class MaxPQ
         @keys[@size] = nil
         @size -= 1
 
-        sink(1) 
+        sink(1, @size) 
 
         return key_to_delete
     end
@@ -41,9 +41,8 @@ class MaxPQ
         end
     end
 
-    def sink (k)
-        while k < @size  and ((!@keys[k * 2].nil? and @keys[k] < @keys[k * 2]) or (!@keys[k * 2 + 1].nil? and @keys[k] < @keys[k * 2 + 1]))
-            
+    def sink (k, n)
+        while k < n and ((!@keys[k * 2].nil? and @keys[k] < @keys[k * 2]) or (!@keys[k * 2 + 1].nil? and @keys[k] < @keys[k * 2 + 1]))
             if !@keys[k * 2 + 1].nil? and @keys[k * 2] > @keys[k * 2 + 1]
                 exch(@keys, k, k * 2)
                 k = k * 2
