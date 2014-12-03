@@ -1,6 +1,7 @@
 #PriorityQueue
 require_relative '../Sorts/SortUtils.rb'
 class MaxPQ
+     attr_accessor :keys
 
     def initialize ()
         @keys = Array.new()
@@ -42,24 +43,14 @@ class MaxPQ
     end
 
     def sink (k, n)
-        while k < n and ((!@keys[k * 2].nil? and @keys[k] < @keys[k * 2]) or (!@keys[k * 2 + 1].nil? and @keys[k] < @keys[k * 2 + 1]))
-            if !@keys[k * 2 + 1].nil? and @keys[k * 2] > @keys[k * 2 + 1]
-                exch(@keys, k, k * 2)
-                k = k * 2
-            else
+        while (k <= n) and ((k * 2 <= n and @keys[k] < @keys[k * 2]) or (k * 2 + 1 <= n and @keys[k] < @keys[k * 2 + 1]))
+            if k * 2 + 1 <= n and  @keys[k * 2 + 1] > @keys[k * 2]
                 exch(@keys, k, k * 2 + 1)
                 k = k * 2 + 1
+            else
+                exch(@keys, k, k * 2)
+                k = k * 2
             end 
         end  
     end
-
-    def to_s ()
-        str = ""
-        for i in 1..@size
-            str = str + @keys[i].to_s
-            i += 1
-        end
-        return str
-    end
-
 end

@@ -49,7 +49,7 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.insert('C')
     @pq.insert('B')
     @pq.insert('D')
-    assert_equal("DCBA", @pq.to_s()) 
+    assert_equal(["D", "C", "B", "A"], @pq.keys.compact) 
   end
 
   # insert@keys[k * 2 + 1].nil?
@@ -61,7 +61,7 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.insert('D')
 
     @pq.deleteMax()
-    assert_equal("CAB", @pq.to_s()) 
+    assert_equal(["C", "A", "B"], @pq.keys.compact)
   end
 
   # insert
@@ -91,7 +91,7 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.deleteMax()
     @pq.deleteMax()
 
-    assert_equal("FDBA", @pq.to_s()) 
+    assert_equal(["F", "D", "B", "A"], @pq.keys.compact) 
   end
 
   # isEmpty
