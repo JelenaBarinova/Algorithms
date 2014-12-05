@@ -20,28 +20,8 @@ class BST
         @root = putN(@root, key, value) 
     end
 
-    def putN (node, key, value)
-        if node.nil? then 
-            return Node.new(key, value)
-        end
-        if node.key > key then
-            node.left = putN(node.left, key, value)
-        elsif node.key < key then
-            node.right = putN(node.right, key, value)
-        else 
-            node.value = value
-        end   
-        node.count = 1 + sizeN(node.left) + sizeN(node.right)
-        return node           
-    end
-
     def size ()
         return sizeN(@root)
-    end
-
-    def sizeN (node)
-        if node.nil? then return 0 end
-        return node.count
     end
 
     def get (key)
@@ -60,6 +40,52 @@ class BST
 
     def delete (key)
         @root = deleteN(@root, key)
+    end
+
+    def deleteMin ()
+        @root = deleteMinN(@root)
+    end
+
+    def keys ()
+        q = Queue.new()
+        inOrder(@root, q)
+        return q
+    end
+
+    def min ()
+        min = minN(@root)
+        if min.nil? then return nil end
+        return min.value
+    end
+
+    def max ()
+        node = @root
+        if node.nil? then return nil end
+        while !node.right.nil?
+            node = node.right
+        end
+        return node.value
+    end
+
+#private methods
+    def putN (node, key, value)
+        if node.nil? then 
+            return Node.new(key, value)
+        end
+        if node.key > key then
+            node.left = putN(node.left, key, value)
+        elsif node.key < key then
+            node.right = putN(node.right, key, value)
+        else 
+            node.value = value
+        end   
+        node.count = 1 + sizeN(node.left) + sizeN(node.right)
+        return node           
+    end
+
+    def sizeN (node)
+        if node.nil? then return 0 end
+        return node.count
     end
 
     def deleteN (node, key)
@@ -81,21 +107,11 @@ class BST
         return node
     end
 
-    def deleteMin ()
-        @root = deleteMinN(@root)
-    end
-
     def deleteMinN (node)
         if node.left.nil? then return node.right end
         node.left = deleteMinN(node.left)
         node.count = 1 + sizeN(node.left) + sizeN(node.right)
         return node
-    end
-
-    def min ()
-        min = minN(@root)
-        if min.nil? then return nil end
-        return min.value
     end
 
     def minN (node)
@@ -106,25 +122,12 @@ class BST
         return node
     end
 
-    def max ()
-        node = @root
-        if node.nil? then return nil end
-        while !node.right.nil?
-            node = node.right
-        end
-        return node.value
-    end
-
-    def keys ()
-        q = Queue.new()
-        inOrder(@root, q)
-        return q
-    end
-
     def inOrder (node, q)
         if node.nil? then return nil end
         inOrder(node.left, q)
         q.enqueue(node)
         inOrder(node.right, q)
     end
+
+    private :putN, :sizeN, :deleteN, :deleteMinN, :minN, :inOrder
 end
