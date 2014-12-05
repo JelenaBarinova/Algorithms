@@ -1,4 +1,5 @@
 #BST
+#iterate
 class BST
 
     def initialize ()
@@ -114,12 +115,3 @@ class BST
         return node.value
     end
 end
-=begin
-@bst = BST.new()
-@bst.put(1, "A")
-puts "size " + @bst.size().to_s
-@bst.put(2, "B")
-puts "size " + @bst.size().to_s
-
-puts @bst.get(2)
-=end
