@@ -1,6 +1,4 @@
-#queue linked list implementation
-require_relative "LinkedList"
-
+#queue array implementation
 class Queue 
     attr_accessor :capacity
 
