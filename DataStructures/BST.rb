@@ -1,5 +1,5 @@
 #BST
-#iterate
+require_relative 'QueueArray'
 class BST
 
     def initialize ()
@@ -113,5 +113,18 @@ class BST
             node = node.right
         end
         return node.value
+    end
+
+    def keys ()
+        q = Queue.new()
+        inOrder(@root, q)
+        return q
+    end
+
+    def inOrder (node, q)
+        if node.nil? then return nil end
+        inOrder(node.left, q)
+        q.enqueue(node)
+        inOrder(node.right, q)
     end
 end
