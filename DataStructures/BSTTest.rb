@@ -234,7 +234,7 @@ class TestBST < Test::Unit::TestCase
         res = q.isEmpty()
         assert_equal(true, res)
     end
-        def test_keys_returns_correct_queue_of_a_bs_tree_after_put_delete_and_update
+    def test_keys_returns_correct_queue_of_a_bs_tree_after_put_delete_and_update
         @bst.put('D', 1)
         @bst.put('B', 3)
         @bst.put('C', 4)
@@ -249,5 +249,107 @@ class TestBST < Test::Unit::TestCase
         res = ''
         q.iterate {|i| res += i.key.to_s}
         assert_equal("ABCDX", res)
+    end
+# keys preOrder
+    def test_keys_preorder_returns_queue_of_a_bs_tree
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
+
+        q = @bst.keys(OrderType::PRE)
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("DBACF", res)
+    end
+    def test_keys_preorder_returns_empty_queue_for_empty_tree
+        q = @bst.keys(OrderType::PRE)
+        res = q.isEmpty()
+        assert_equal(true, res)
+    end
+    def test_keys_preorder_returns_correct_queue_of_a_bs_tree_after_put_delete_and_update
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('X', 1)
+        @bst.put('F', 2)
+        @bst.put('B', 0)
+        @bst.put('X', 1)
+        @bst.delete('F')
+
+        q = @bst.keys(OrderType::PRE)
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("DBACX", res)
+    end
+    # keys postOrder
+    def test_keys_postorder_returns_queue_of_a_bs_tree
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
+
+        q = @bst.keys(OrderType::POST)
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("ACBFD", res)
+    end
+    def test_keys_postorder_returns_empty_queue_for_empty_tree
+        q = @bst.keys(OrderType::POST)
+        res = q.isEmpty()
+        assert_equal(true, res)
+    end
+    def test_keys_postorder_returns_correct_queue_of_a_bs_tree_after_put_delete_and_update
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('X', 1)
+        @bst.put('F', 2)
+        @bst.put('B', 0)
+        @bst.put('X', 1)
+        @bst.delete('F')
+
+        q = @bst.keys(OrderType::POST)
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("ACBXD", res)
+    end
+    # keys levelOrder
+    def test_keys_levelorder_returns_queue_of_a_bs_tree
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
+
+        q = @bst.keys(OrderType::LEVEL)
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("DBFAC", res)
+    end
+    def test_keys_levelorder_returns_empty_queue_for_empty_tree
+        q = @bst.keys(OrderType::LEVEL)
+        res = q.isEmpty()
+        assert_equal(true, res)
+    end
+    def test_keys_levelorder_returns_correct_queue_of_a_bs_tree_after_put_delete_and_update
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('X', 1)
+        @bst.put('F', 2)
+        @bst.put('B', 0)
+        @bst.put('X', 1)
+        @bst.delete('F')
+
+        q = @bst.keys(OrderType::LEVEL)
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("DBXAC", res)
     end
 end

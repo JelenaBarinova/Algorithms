@@ -1,4 +1,8 @@
 #BST
+#To DO
+#get floor, ceiling
+#get range
+
 require_relative 'QueueArray'
 class BST
 
@@ -46,9 +50,18 @@ class BST
         @root = deleteMinN(@root)
     end
 
-    def keys ()
+    def keys (order_type = 2)
         q = Queue.new()
-        inOrder(@root, q)
+        case order_type
+        when 1
+            preOrderN(@root, q)  
+        when 2
+            inOrderN(@root, q)
+        when 3
+            postOrderN(@root, q)  
+        when 4
+            levelOrderN(@root, q)
+        end
         return q
     end
 
@@ -122,12 +135,52 @@ class BST
         return node
     end
 
-    def inOrder (node, q)
+    def inOrderN (node, q)
         if node.nil? then return nil end
-        inOrder(node.left, q)
+        inOrderN(node.left, q)
         q.enqueue(node)
-        inOrder(node.right, q)
+        inOrderN(node.right, q)
     end
 
-    private :putN, :sizeN, :deleteN, :deleteMinN, :minN, :inOrder
+    def preOrderN (node, q)
+        if node.nil? then return nil end
+        q.enqueue(node)
+        preOrderN(node.left, q)
+        preOrderN(node.right, q)
+    end
+
+    def postOrderN (node, q)
+        if node.nil? then return nil end
+        postOrderN(node.left, q)
+        postOrderN(node.right, q)
+        q.enqueue(node)
+    end
+
+    def levelOrderN (node, q)
+        if node.nil? then return nil end
+
+        tmp = Array.new()
+        tmp << node
+
+        while !tmp.empty?
+            x = tmp.delete_at(0)
+
+            q.enqueue(x)
+
+            if !x.left.nil? then tmp << x.left end
+            if !x.right.nil? then tmp << x.right end
+        end
+    end
+
+    private :putN, :sizeN, :deleteN, :deleteMinN, :minN, :preOrderN, :inOrderN, :postOrderN, :levelOrderN
 end
+
+
+module OrderType
+  PRE = 1
+  IN = 2
+  POST = 3
+  LEVEL = 4
+end
+
+
