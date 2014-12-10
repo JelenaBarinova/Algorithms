@@ -352,4 +352,27 @@ class TestBST < Test::Unit::TestCase
         q.iterate {|i| res += i.key.to_s}
         assert_equal("DBXAC", res)
     end
+
+    # floor
+    def test_floor_return_B_for_key_B
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
+
+        res = @bst.floor('B')
+
+        assert_equal('B', res)
+    end
+    def test_floor_return_D_for_key_G
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+      
+        res = @bst.floor('G')
+
+        assert_equal('D', res)
+    end
 end

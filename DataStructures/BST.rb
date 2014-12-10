@@ -80,6 +80,12 @@ class BST
         return node.value
     end
 
+    def floor (key)
+        node = floorN(@root, key)
+        if node.nil? then return nil end
+        return node.key
+    end
+
 #private methods
     def putN (node, key, value)
         if node.nil? then 
@@ -172,9 +178,20 @@ class BST
         end
     end
 
+    def floorN (node, key)
+        if node.nil? then return nil end
+
+        if key == node.key then return node end
+        if key < node.key then return floorN(node.left, key) end 
+        x = floorN(node.right, key)
+        if x.nil? then return node 
+        else 
+            return x
+        end
+    end
+
     private :putN, :sizeN, :deleteN, :deleteMinN, :minN, :preOrderN, :inOrderN, :postOrderN, :levelOrderN
 end
-
 
 module OrderType
   PRE = 1
@@ -182,5 +199,4 @@ module OrderType
   POST = 3
   LEVEL = 4
 end
-
 
