@@ -352,7 +352,41 @@ class TestBST < Test::Unit::TestCase
         q.iterate {|i| res += i.key.to_s}
         assert_equal("DBXAC", res)
     end
+    
+    # keys non recuircive
+    def test_keysC_returns_queue_of_a_bs_tree
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
 
+        q = @bst.keysC()
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("ABCDF", res)
+    end
+    def test_keysC_returns_empty_queue_for_empty_tree
+        q = @bst.keysC()
+        res = q.isEmpty()
+        assert_equal(true, res)
+    end
+    def test_keysC_returns_correct_queue_of_a_bs_tree_after_put_delete_and_update
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('X', 1)
+        @bst.put('F', 2)
+        @bst.put('B', 0)
+        @bst.put('X', 1)
+        @bst.delete('F')
+
+        q = @bst.keysC()
+        res = ''
+        q.iterate {|i| res += i.key.to_s}
+        assert_equal("ABCDX", res)
+    end
     # floor
     def test_floor_return_B_for_key_B
         @bst.put('D', 1)

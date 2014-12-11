@@ -86,6 +86,22 @@ class BST
         return node.key
     end
 
+    def keysC ()
+        q = Queue.new()
+        tmp = Array.new()
+        node = @root
+        while !tmp.empty? or !node.nil?
+            if !node.nil? then
+                tmp.push(node)
+                node = node.left
+            else
+                node = tmp.pop()
+                q.enqueue(node)
+                node = node.right
+            end
+        end
+        return q
+    end
 #private methods
     def putN (node, key, value)
         if node.nil? then 
