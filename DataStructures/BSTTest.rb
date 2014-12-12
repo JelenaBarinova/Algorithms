@@ -409,4 +409,47 @@ class TestBST < Test::Unit::TestCase
 
         assert_equal('D', res)
     end
+
+    # keysInRange
+    def test_keysInRange_returns_correct_keys_for_short_range
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
+
+        q = @bst.keysInRange('A', 'B')
+        res = ''
+        q.each {|i| res += i.key.to_s}
+
+        assert_equal('AB', res.to_s)
+    end
+
+    def test_keysInRange_returns_correct_keys_for_big_range
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
+
+        q = @bst.keysInRange('B', 'X')
+        res = ''
+        q.each {|i| res += i.key.to_s}
+
+        assert_equal('BCDF', res.to_s)
+    end
+
+    def test_keysInRange_returns_empty_for_out_of_the_range_tree
+        @bst.put('D', 1)
+        @bst.put('B', 3)
+        @bst.put('C', 4)
+        @bst.put('A', 1)
+        @bst.put('F', 2)
+
+        q = @bst.keysInRange('X', 'Y')
+        res = ''
+        q.each {|i| res += i.key.to_s}
+
+        assert_equal('', res.to_s)
+    end
 end

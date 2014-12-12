@@ -102,6 +102,13 @@ class BST
         end
         return q
     end
+
+    def keysInRange (k1, k2)
+        q = Array.new()
+        keysInRangeN(@root, q, k1, k2)
+        return q
+    end
+
 #private methods
     def putN (node, key, value)
         if node.nil? then 
@@ -203,6 +210,14 @@ class BST
         if x.nil? then return node 
         else 
             return x
+        end
+    end
+
+    def keysInRangeN (node, q, k1, k2)
+        if node.nil? then return nil end
+        if node.key > k1 then keysInRangeN(node.left, q, k1, k2) end
+        if node.key >= k1 and node.key <= k2 then q << node end
+        if node.key < k2 then keysInRangeN(node.right, q, k1, k2)
         end
     end
 
