@@ -221,7 +221,7 @@ class BST
         end
     end
 
-    private :putN, :sizeN, :deleteN, :deleteMinN, :minN, :preOrderN, :inOrderN, :postOrderN, :levelOrderN
+    private :putN, :sizeN, :deleteN, :deleteMinN, :minN, :preOrderN, :inOrderN, :postOrderN, :levelOrderN, :floorN, :keysInRangeN
 end
 
 module OrderType
