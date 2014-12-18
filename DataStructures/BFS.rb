@@ -1,6 +1,6 @@
 require_relative 'Graph'
 
-class DFS
+class BFS
     attr_accessor :edgeTo
 
     def initialize (graph, s)
@@ -8,18 +8,24 @@ class DFS
         @root = s
         @marked = Array.new(graph.vertices)
         @edgeTo = Array.new(graph.vertices)
-        dfsIn(graph, s)
+        bfsIn(graph, s)
     end
 
-    def dfsIn (graph, s)
-        @marked[s] = true
-        v = graph.adj(s)
-        for i in 0..v.size() - 1
-            if !@marked[v[i]] then
-                @edgeTo[v[i]] = s
-                dfsIn(graph, v[i])
+    def bfsIn (graph, s)
+        edgesQueue = Array.new()
+        edgesQueue << s #enqueue
+        while !edgesQueue.empty? 
+            i = edgesQueue.shift #dequeue
+            @marked[i] = true
+            adj = graph.adj(i)
+            for j in 0..adj.size - 1
+                if !@marked[adj[j]] then 
+                    edgesQueue << adj[j]
+                    @edgeTo[adj[j]] = i
+                end
             end
         end
+        
     end
 
     def hasPath (v)
