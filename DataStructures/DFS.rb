@@ -20,7 +20,6 @@ class DFS
                 dfsIn(graph, v[i])
             end
         end
-
     end
 
     def hasPath (v)
