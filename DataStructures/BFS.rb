@@ -18,14 +18,13 @@ class BFS
             i = edgesQueue.shift #dequeue
             @marked[i] = true
             adj = graph.adj(i)
-            for j in 0..adj.size - 1
-                if !@marked[adj[j]] then 
-                    edgesQueue << adj[j]
-                    @edgeTo[adj[j]] = i
+            adj.each do |j| 
+                if !@marked[j] then 
+                    edgesQueue << j
+                    @edgeTo[j] = i
                 end
             end
         end
-        
     end
 
     def hasPath (v)
