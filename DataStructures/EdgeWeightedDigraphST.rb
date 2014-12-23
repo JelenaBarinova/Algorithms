@@ -1,8 +1,6 @@
 require_relative 'EdgeWeightedDigraph'
 require_relative 'PriorityQueueKeyValue'
-#topological sort
-#dijkstra
-#edge weighted dag
+
 class ST
     attr_accessor :edgeTo, :distTo
 
