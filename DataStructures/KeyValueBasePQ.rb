@@ -15,7 +15,7 @@ class KeyValueBasePQ
         swim(@size)
     end
 
-    def delete () #deletes min element - root of the tree
+    def delete ()
         if @size == 0 then return nil end
 
         value_to_delete = @values[1]
