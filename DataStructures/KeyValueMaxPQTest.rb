@@ -1,11 +1,11 @@
-require_relative 'PriorityQueueKeyValue'
+require_relative 'KeyValueMaxPQ'
 
 require "test/unit"
 
 class TestMaxPQ < Test::Unit::TestCase
  
   def setup
-    @pq = KeyValuePQ.new()
+    @pq = KeyValueMaxPQ.new()
   end
 
   # test size()
@@ -34,7 +34,7 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.insert(3, 0.3)
     @pq.insert(2, 0.2)
 
-    @pq.deleteMax()
+    @pq.delete()
 
     assert_equal(3, @pq.size()) 
   end
@@ -55,7 +55,7 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.insert(2, 0.2)
     @pq.insert(4, 0.4)
 
-    @pq.deleteMax()
+    @pq.delete()
 
     assert_equal([0.3, 0.1, 0.2], @pq.values.compact)
   end
@@ -68,7 +68,7 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.insert(2, 0.2)
     @pq.insert(4, 0.4)
 
-    str = @pq.deleteMax()
+    str = @pq.delete()
 
     assert_equal([6, 0.6], str) 
   end
@@ -82,51 +82,12 @@ class TestMaxPQ < Test::Unit::TestCase
     @pq.insert(5, 0.5)
     @pq.insert(9, 0.9)
 
-    @pq.deleteMax()
-    @pq.deleteMax()
-    @pq.deleteMax()
+    @pq.delete()
+    @pq.delete()
+    @pq.delete()
 
     assert_equal([0.5, 0.4, 0.2, 0.1], @pq.values.compact) 
   end
-  #deleteMin
-  def test_deleteMin_deletes_key_and_arrange_pq_as_expected
-    
-    @pq.insert(1, 0.1)
-    @pq.insert(3, 0.3)
-    @pq.insert(2, 0.2)
-    @pq.insert(4, 0.4)
-
-    @pq.deleteMin()
-    assert_equal([4, 3, 2], @pq.keys.compact)
-  end
-  def test_deleteMin_deletes_and_returns_min_key_in_a_pq
-    
-    @pq.insert(1, 0.1)
-    @pq.insert(6, 0.6)
-    @pq.insert(2, 0.2)
-    @pq.insert(4, 0.4)
-
-    str = @pq.deleteMin()
-
-    assert_equal([1, 0.1], str) 
-  end
-  def test_deleteMin_deletes_3_nodes_and_pq_stays_as_expected
-    
-    @pq.insert(1, 0.1)
-    @pq.insert(6, 0.6)
-    @pq.insert(8, 0.8)
-    @pq.insert(2, 0.2)
-    @pq.insert(4, 0.4)
-    @pq.insert(5, 0.5)
-    @pq.insert(9, 0.9)
-
-    @pq.deleteMin()
-    @pq.deleteMin()
-    @pq.deleteMin()
-
-    assert_equal([9, 4, 8, 1], @pq.keys.compact) 
-  end
-
   # isEmpty
   def test_isEmpty_retuns_true_when_pq_is_just_created
 
@@ -170,15 +131,26 @@ class TestMaxPQ < Test::Unit::TestCase
   end
 
   # updateValue
-  def test_updateValue_updates_value_and_puts_item_in_order
+  def test_upsert_updates_value_and_puts_item_in_order
     
     @pq.insert(1, 0.1)
     @pq.insert(3, 0.3)
     @pq.insert(2, 0.2)
     @pq.insert(4, 0.4)
 
-    @pq.updateValue(2, 0.5)
+    @pq.upsert(2, 0.5)
 
     assert_equal([0.5, 0.3, 0.4, 0.1], @pq.values.compact) 
+  end
+  def test_upsert_inserts_value_when_key_is_not_present
+    
+    @pq.insert(1, 0.1)
+    @pq.insert(3, 0.3)
+    @pq.insert(2, 0.2)
+    @pq.insert(4, 0.4)
+
+    @pq.upsert(5, 0.5)
+
+    assert_equal([0.5, 0.4, 0.2, 0.1, 0.3], @pq.values.compact) 
   end
 end

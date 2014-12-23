@@ -1,5 +1,5 @@
 require_relative 'EdgeWeightedDigraph'
-require_relative 'PriorityQueueKeyValue'
+require_relative 'KeyValueMinPQ'
 
 class ST
     attr_accessor :edgeTo, :distTo
@@ -9,7 +9,7 @@ class ST
         @root = s
         @edgeTo = Array.new(graph.vertices)
         @distTo = Array.new(graph.vertices)
-        @queue = KeyValuePQ.new() #vertices to visit
+        @queue = KeyValueMinPQ.new() #vertices to visit
         calcPaths(graph, s)
     end
 
@@ -22,7 +22,7 @@ class ST
         @queue.insert(s, 0.0)
 
         while !@queue.isEmpty()
-            v = @queue.deleteMin()[0]
+            v = @queue.delete()[0]
             
             graph.adj(v).each {|e| relax(e)}
         end
@@ -35,11 +35,7 @@ class ST
             distTo[w] = distTo[v] + e.weight()
             edgeTo[w] = e
 
-            if @queue.contains(w) then 
-                @queue.updateValue(w, distTo[v] + e.weight())
-            else
-                @queue.insert(w, distTo[v] + e.weight())
-            end
+            @queue.upsert(w, distTo[v] + e.weight())
         end
     end
 
