@@ -63,4 +63,13 @@ class KeyValueBasePQ
             end
         end
     end
+
+    def updateValue (key, value)
+    end
+    
+    def swim (k)
+    end
+
+    def sink (k, n)
+    end
 end
