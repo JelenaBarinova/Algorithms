@@ -1,6 +1,6 @@
 #PriorityQueue
 require_relative '../Sorts/SortUtils.rb'
-class MaxPQ
+class KeyValuePQ
      attr_accessor :values, :keys
 
     def initialize ()

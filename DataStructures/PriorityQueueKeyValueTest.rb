@@ -5,7 +5,7 @@ require "test/unit"
 class TestMaxPQ < Test::Unit::TestCase
  
   def setup
-    @pq = MaxPQ.new()
+    @pq = KeyValuePQ.new()
   end
 
   # test size()
