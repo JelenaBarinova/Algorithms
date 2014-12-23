@@ -53,6 +53,38 @@ class KeyValuePQ
         return @size
     end
 
+    def contains (key)
+        for i in 1..@size
+            if @keys[i] == key then
+                return true
+            end
+        end
+        return false
+    end
+
+    def updateValue (key, value)
+        if !contains(key) then return nil end
+        index = @keys.index(key)
+        old_value = getValue(key)
+        
+        @values[index] = value
+
+        if old_value > value then 
+            sink(index, @size)
+        else
+            swim(index)
+        end
+    end
+
+    def getValue (key)
+        if !contains(key) then return nil end
+        for i in 1..@size
+            if @keys[i] == key then
+                return @values[i]
+            end
+        end
+    end
+    
     def swim (k)
         while k > 1 and @values[k] > @values[k / 2]
             exchKeyValue(@keys, @values, k, k / 2)

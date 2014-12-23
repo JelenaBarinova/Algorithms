@@ -138,4 +138,47 @@ class TestMaxPQ < Test::Unit::TestCase
   
     assert_equal(false, @pq.isEmpty())
   end
+
+  # contains
+    def test_contains_returns_true_when_key_is_present
+    
+    @pq.insert(1, 0.1)
+    @pq.insert(6, 0.6)
+    @pq.insert(8, 0.8)
+    @pq.insert(2, 0.2)
+    @pq.insert(4, 0.4)
+    @pq.insert(5, 0.5)
+    @pq.insert(9, 0.9)
+
+    assert_equal(true, @pq.contains(5)) 
+  end
+  def test_contains_returns_false_when_key_is_present
+    
+    @pq.insert(1, 0.1)
+    @pq.insert(6, 0.6)
+    @pq.insert(8, 0.8)
+    @pq.insert(2, 0.2)
+    @pq.insert(4, 0.4)
+    @pq.insert(5, 0.5)
+    @pq.insert(9, 0.9)
+
+    assert_equal(false, @pq.contains(15)) 
+  end
+  def test_contains_returns_false_for_empty_queue
+
+    assert_equal(false, @pq.contains(15)) 
+  end
+
+  # updateValue
+  def test_updateValue_updates_value_and_puts_item_in_order
+    
+    @pq.insert(1, 0.1)
+    @pq.insert(3, 0.3)
+    @pq.insert(2, 0.2)
+    @pq.insert(4, 0.4)
+
+    @pq.updateValue(2, 0.5)
+
+    assert_equal([0.5, 0.3, 0.4, 0.1], @pq.values.compact) 
+  end
 end
