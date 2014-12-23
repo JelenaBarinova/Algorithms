@@ -29,7 +29,8 @@ class TestEdgeWeightedDigraph < Test::Unit::TestCase
     def test_adj_returns_471_for_vertice_5_for_weighted_digraph1
         @g = populate_edge_weighted_digraph_from_file("TestGraphs/weighteddigraph1.txt")
 
-        res = @g.adj(5)
+        res = []
+        @g.adj(5).each {|e| res << e.to()}
 
         assert_equal([4, 7, 1], res)
     end

@@ -10,13 +10,38 @@ class TestST < Test::Unit::TestCase
     end
     
     # test dfs()
-    def test_st_for_digraph1
+    def test_st_for_digraph2_from_0_vertex
 
-        @g = populate_edge_weighted_digraph_from_file("TestGraphs/weighteddigraph1.txt")
+        @g = populate_edge_weighted_digraph_from_file("TestGraphs/weighteddigraph2.txt")
 
         st = ST.new(@g, 0)
-        res = st.edgeTo
+        
+        res = []
+        st.edgeTo.compact.each {|e| res << e.from()}
 
-        assert_equal([nil, 0, 0, 1, 1, 1, nil, 3, 3, 5, 5, 10, 10], res)
+        assert_equal([0, 5, 2, 0, 4, 2, 0], res)
+    end
+
+    def test_path_for_digraph2_from_0_to_5
+
+        @g = populate_edge_weighted_digraph_from_file("TestGraphs/weighteddigraph2.txt")
+
+        st = ST.new(@g, 0)
+        
+        res = []
+        st.path(5).each {|e| res << e}
+
+        assert_equal([5, 4, 0], res)
+    end
+
+    def test_dist_for_digraph2_from_0_to_6
+
+        @g = populate_edge_weighted_digraph_from_file("TestGraphs/weighteddigraph2.txt")
+
+        st = ST.new(@g, 0)
+        
+        res = st.dist(6)
+
+        assert_equal(25, res)
     end
 end

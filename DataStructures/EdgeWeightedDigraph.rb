@@ -37,8 +37,9 @@ class EdgeWeightedDigraph
     end 
 
     def adj (v)
-        tmp = Array.new()
-        @adj[v].each {|i| tmp << i.to()}
-        return tmp
+        return @adj[v]
+        #tmp = Array.new()
+        #@adj[v].each {|i| tmp << i}
+        #return tmp
     end
 end

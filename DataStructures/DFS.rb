@@ -13,11 +13,10 @@ class DFS
 
     def dfsIn (graph, s)
         @marked[s] = true
-        v = graph.adj(s)
-        for i in 0..v.size() - 1
-            if !@marked[v[i]] then
-                @edgeTo[v[i]] = s
-                dfsIn(graph, v[i])
+        graph.adj(s).each do |i|
+            if !@marked[i] then
+                @edgeTo[i] = s
+                dfsIn(graph, i)
             end
         end
     end
