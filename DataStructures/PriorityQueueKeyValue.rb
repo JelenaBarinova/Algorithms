@@ -1,15 +1,17 @@
 #PriorityQueue
 require_relative '../Sorts/SortUtils.rb'
 class MaxPQ
-     attr_accessor :keys
+     attr_accessor :values, :keys
 
     def initialize ()
+        @values = Array.new()
         @keys = Array.new()
         @size = 0
     end
 
-    def insert (key)
+    def insert (key, value)
         @size += 1
+        @values[@size] = value
         @keys[@size] = key
         swim(@size)
     end
@@ -17,26 +19,30 @@ class MaxPQ
     def deleteMax ()
         if @size == 0 then return nil end
 
+        value_to_delete = @values[1]
         key_to_delete = @keys[1]
-        exch(@keys, 1, @size)
+        exchKeyValue(@keys, @values, 1, @size)
+        @values[@size] = nil
         @keys[@size] = nil
         @size -= 1
 
         sink(1, @size) 
 
-        return key_to_delete
+        return key_to_delete, value_to_delete
     end
 
     def deleteMin ()
         if @size == 0 then return nil end
 
+        value_to_delete = @values[@size]
         key_to_delete = @keys[@size]
+        @values[@size] = nil
         @keys[@size] = nil
         @size -= 1
 
         sink(1, @size) 
 
-        return key_to_delete
+        return key_to_delete, value_to_delete
     end
 
     def isEmpty ()
@@ -48,19 +54,19 @@ class MaxPQ
     end
 
     def swim (k)
-        while k > 1 and @keys[k] > @keys[k / 2]
-            exch(@keys, k, k / 2)
+        while k > 1 and @values[k] > @values[k / 2]
+            exchKeyValue(@keys, @values, k, k / 2)
             k = k / 2
         end
     end
 
     def sink (k, n)
-        while (k <= n) and ((k * 2 <= n and @keys[k] < @keys[k * 2]) or (k * 2 + 1 <= n and @keys[k] < @keys[k * 2 + 1]))
-            if k * 2 + 1 <= n and  @keys[k * 2 + 1] > @keys[k * 2]
-                exch(@keys, k, k * 2 + 1)
+        while (k <= n) and ((k * 2 <= n and @values[k] < @values[k * 2]) or (k * 2 + 1 <= n and @values[k] < @values[k * 2 + 1]))
+            if k * 2 + 1 <= n and  @values[k * 2 + 1] > @values[k * 2]
+                exchKeyValue(@keys, @values, k, k * 2 + 1)
                 k = k * 2 + 1
             else
-                exch(@keys, k, k * 2)
+                exchKeyValue(@keys, @values, k, k * 2)
                 k = k * 2
             end 
         end  
