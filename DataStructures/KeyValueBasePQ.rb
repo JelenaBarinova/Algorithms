@@ -1,6 +1,6 @@
 require_relative '../Sorts/SortUtils.rb'
 class KeyValueBasePQ
-     attr_accessor :values, :keys
+    attr_accessor :values, :keys
 
     def initialize ()
         @values = Array.new()
@@ -64,6 +64,7 @@ class KeyValueBasePQ
         end
     end
 
+protected
     def updateValue (key, value)
     end
     

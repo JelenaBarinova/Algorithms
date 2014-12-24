@@ -3,6 +3,8 @@ require_relative 'KeyValueBasePQ'
 
 class KeyValueMaxPQ < KeyValueBasePQ
 
+protected
+
     def updateValue (key, value)
         if !contains(key) then return nil end
         index = @keys.index(key)
@@ -35,5 +37,4 @@ class KeyValueMaxPQ < KeyValueBasePQ
             end 
         end  
     end
-    private :updateValue, :swim, :sink
 end
