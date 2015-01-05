@@ -38,6 +38,10 @@ class KeyValueBasePQ
         end
     end
 
+    def peek ()
+        return @keys[1], @values[1]
+    end
+
     def isEmpty ()
         return @size == 0
     end

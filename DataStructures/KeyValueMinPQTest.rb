@@ -2,7 +2,7 @@ require_relative 'KeyValueMinPQ'
 
 require "test/unit"
 
-class TestMaxPQ < Test::Unit::TestCase
+class TestMinPQ < Test::Unit::TestCase
  
   def setup
     @pq = KeyValueMinPQ.new()
@@ -62,7 +62,7 @@ class TestMaxPQ < Test::Unit::TestCase
   end
 
   # deleteMax
-  def test_delete_deletes_and_returns_max_key_in_a_pq
+  def test_delete_deletes_and_returns_min_key_in_a_pq
     
     @pq.insert(1, 0.1)
     @pq.insert(6, 0.6)
