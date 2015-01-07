@@ -1,24 +1,20 @@
-#BST
-#To DO
-#get floor, ceiling
-#get range
-
 require_relative 'QueueArray'
+class Node
+    attr_accessor :key, :value, :left, :right, :count
+
+    def initialize (key, value)
+        @key = key
+        @value = value
+        @count = 1
+    end
+end 
+
 class BST
+    attr_accessor :root
 
     def initialize ()
         @root = nil
     end
-
-    class Node
-        attr_accessor :key, :value, :left, :right, :count
-
-        def initialize (key, value)
-            @key = key
-            @value = value
-            @count = 1
-        end
-    end 
 
     def put (key, value)
         @root = putN(@root, key, value) 
