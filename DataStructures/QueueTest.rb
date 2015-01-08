@@ -1,6 +1,6 @@
 
-#require_relative "Queue"
-require_relative "QueueArray"
+require_relative "Queue"
+#require_relative "QueueArray"
 require "test/unit"
 
 class TestQueue < Test::Unit::TestCase

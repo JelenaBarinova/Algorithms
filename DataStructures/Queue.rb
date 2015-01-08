@@ -9,12 +9,14 @@ class Queue
     def initialize ()   
         @first = Node.new() # first added to queue (oldest in queue, first to pop)
         @last = @first # last added to queue (most recent)
+        @size = 0
     end
 
     def enqueue (value)
         node = Node.new(value, nil)
         @last.next = node
         @last = @last.next
+        @size += 1
     end
 
     def dequeue ()
@@ -23,18 +25,12 @@ class Queue
             value = @first.next.value
             @first.next = @first.next.next
         end
+        @size -= 1
         return value
     end
 
     def size ()
-        i = 0
-        current = @first.next
-
-        while !current.nil? 
-            i += 1
-            current = current.next
-        end
-        return i
+        return @size
     end
 
     def iterate ()
