@@ -13,18 +13,18 @@ end
 
 def Sort (aux, array, lo, hi)
     if lo >= hi then return nil end
-    
+
     mid = lo + (hi - lo) / 2
 
     Sort(aux, array, lo, mid)
     Sort(aux, array, mid + 1, hi)
     Merge(aux, array, lo, mid, hi)
-    
-    return array 
+
+    return array
 end
 
 def Merge (aux, array, lo, mid, hi)
-    if !array[lo..mid].sorted? or !array[mid + 1..hi].sorted? then 
+    if !array[lo..mid].sorted? or !array[mid + 1..hi].sorted? then
         raise 'Arrays are not sorted before merge operation'
         return nil
     end
@@ -38,7 +38,7 @@ def Merge (aux, array, lo, mid, hi)
     j = mid + 1
     k = lo
     while k <= hi
-        if i > mid then 
+        if i > mid then
             array[k] = aux[j]
             j += 1
             elsif j > hi then
@@ -47,7 +47,7 @@ def Merge (aux, array, lo, mid, hi)
                 elsif aux[i] > aux[j] then
                     array[k] = aux[j]
                     j += 1
-                    else 
+                    else
                         array[k] = aux[i]
                         i += 1
         end
